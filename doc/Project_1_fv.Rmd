@@ -649,6 +649,6 @@ Most of the states with highest increasing rate are from the west coast.
 
 * In 2014, more Americans became insured, with the Affordable Care Act most likely to being the main catalyst. 
 
-* As ObamaCare was meant to be for those who need financial assistance to get insurance, it is reasonalbe that those who meet the criteria such as low income class have a larger increase in health insurance enrollments. 
+* As ObamaCare was meant to be for those who need financial assistance to get insurance, it is reasonable that those who meet the criteria such as low income class have a larger increase in health insurance enrollments. 
 
 * It could have been more accurate if we had data that specifies a source of insurance, indicating whether or not a person was a beneficiary of ObamaCare. Although insurance information we used include both private and public insurance, we identified a significant growth in health insurance enrollment especially for targeted groups. 
