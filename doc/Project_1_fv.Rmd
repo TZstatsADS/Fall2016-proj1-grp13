@@ -400,7 +400,7 @@ Most of the states are blue in the right half, which indicates that the states w
 
 * As expected, people with lower income are less likely to have health insurance. (On the graph, it   showed that the high class has a lower health insurance coverage rate, but it's due to the small    population being sensitive to a small change)
 
-* Surprisingly, individuals with higher degree more tend to have health insurance
+* Individuals with higher degree more tend to have health insurance
 
 * Education also seemed to play a large role in whether someone had health insurance or not, with     individuals with more education being more likely to have health insurance.
 
