@@ -229,7 +229,7 @@ This brief exploratory analysis looks to achieve two things:
 
 We label the states as blue(Democratic) and red(Republican) according to 2012 Presidential Election result. We wish to investigate whether the political views affect the health insurance adoption.
 
-![Location #1](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Rplot14.png)
+![Location #1](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/statecolor.png)
 
 Most of the states are blue in the right half, which indicates that the states which are more liberal adpot Obamacare better.
 
