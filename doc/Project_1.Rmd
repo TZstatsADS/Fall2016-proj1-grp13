@@ -7,11 +7,11 @@
 
 ---
 title: "Health Coverage"
-output: html_document
+output: github_document
 ---
 
 ```{r}
-plot(c(1,2))
+plot(c(1,2, 3))
 ```
 
 
