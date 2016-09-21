@@ -287,7 +287,7 @@ We label the states as blue(Democratic) and red(Republican) according to 2012 Pr
 <!--  group_by(state) %>%-->
 <!--  summarise(count = n(),perc_hc_weighted = weighted.mean(PUBCOV, w = PWGTP, na.rm = T))#State population with PUBLIC insurance in 2014-->
 
-################# Maps #####################
+
 
 <!--us <- map_data("state")-->
 <!-- #2013  private insurance coverage percent map-->
