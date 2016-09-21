@@ -1,12 +1,12 @@
 
----
-title: "Health Insurance Coverage Analysis""
-output: html_document
----
+<!------->
+<!--title: "Health Insurance Coverage Analysis""-->
+<!--output: html_document-->
+<!------->
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+<!--```{r setup, include=FALSE}-->
+<!--knitr::opts_chunk$set(echo = TRUE)-->
+<!--```-->
 
 
 
@@ -42,67 +42,67 @@ High         | More than $150,000
 
 Similar methods applied to the other variables to be categorical.
 
-```{r, include = F}
-library(choroplethr)
-library(dplyr)
-library(readr)
-library(DT)
-library(data.table)
-library(tidyr)
-library(ggplot2)
-library(scales)
-library(cowplot)
+<!--```{r, include = F}-->
+<!--library(choroplethr)-->
+<!--library(dplyr)-->
+<!--library(readr)-->
+<!--library(DT)-->
+<!--library(data.table)-->
+<!--library(tidyr)-->
+<!--library(ggplot2)-->
+<!--library(scales)-->
+<!--library(cowplot)-->
 
-setwd('E:/OneDrive/Fall 2016/5243 Applied Data Science/Project1') ##change this for your local drive
-set.seed(4)
+<!--setwd('E:/OneDrive/Fall 2016/5243 Applied Data Science/Project1') ##change this for your local drive-->
+<!--set.seed(4)-->
 
-reread = 2
-if (reread == 1){
-  pusa_13<-fread("ss13pusa.csv")
-  pusb_13<-fread("ss13pusb.csv")
-  pus_13 <- rbind(pusa_13,pusb_13)
+<!--reread = 2-->
+<!--if (reread == 1){-->
+<!--  pusa_13<-fread("ss13pusa.csv")-->
+<!--  pusb_13<-fread("ss13pusb.csv")-->
+<!--  pus_13 <- rbind(pusa_13,pusb_13)-->
 
-  pusa_14<-fread("ss14pusa.csv")
-  pusb_14<-fread("ss14pusb.csv")
-  pus_14 <- rbind(pusa_14, pusb_14)
+<!--  pusa_14<-fread("ss14pusa.csv")-->
+<!--  pusb_14<-fread("ss14pusb.csv")-->
+<!--  pus_14 <- rbind(pusa_14, pusb_14)-->
 
-  rm(pusa_13, pusb_13, pusa_14, pusb_14)
+<!--  rm(pusa_13, pusb_13, pusa_14, pusb_14)-->
 
-  pus_13selected <- subset(pus_13,select=c('ST','AGEP','WAGP','SEX','RAC1P','MAR','SCHL','HICOV', 'PWGTP','PRIVCOV','PUBCOV'))
-  pus_13selected$year <- rep(2013, nrow(pus_13selected))
+<!--  pus_13selected <- subset(pus_13,select=c('ST','AGEP','WAGP','SEX','RAC1P','MAR','SCHL','HICOV', 'PWGTP','PRIVCOV','PUBCOV'))-->
+<!--  pus_13selected$year <- rep(2013, nrow(pus_13selected))-->
 
-  pus_14selected <- subset(pus_14,select=c('ST','AGEP','WAGP','SEX','RAC1P','MAR','SCHL','HICOV', 'PWGTP','PRIVCOV','PUBCOV'))
-  pus_14selected$year <- rep(2014, nrow(pus_14selected))
+<!--  pus_14selected <- subset(pus_14,select=c('ST','AGEP','WAGP','SEX','RAC1P','MAR','SCHL','HICOV', 'PWGTP','PRIVCOV','PUBCOV'))-->
+<!--  pus_14selected$year <- rep(2014, nrow(pus_14selected))-->
 
-  pusa <- tbl_df(rbind(pus_13selected, pus_14selected, fill = TRUE))  
-  pusa$year <- as.factor(pusa$year)
-  save(pusa, file = 'pusa.csv')
+<!--  pusa <- tbl_df(rbind(pus_13selected, pus_14selected, fill = TRUE))  -->
+<!--  pusa$year <- as.factor(pusa$year)-->
+<!--  save(pusa, file = 'pusa.csv')-->
   
-  reread == 2
-} else{
-  pusa <- read.csv('pusa.csv')
-}
-```
+<!--  reread == 2-->
+<!--} else{-->
+<!--  pusa <- read.csv('pusa.csv')-->
+<!--}-->
+<!--```-->
 
-```{r, include = F}
-#regrouping
-pusa1 <-
-  pusa %>% 
-  mutate(age = ifelse(AGEP %in% 0:18, "Under 18", ifelse(AGEP %in% 18:29, "20s", ifelse(AGEP %in% 30:39, "30s", ifelse(AGEP %in% 40:49, "40s", ifelse(AGEP %in% 50:59, "50s", ifelse(AGEP %in% 60:69, "60s", "Above 70"))))))) %>%
-  mutate(income = ifelse(WAGP %in% 0:30000, "Low", ifelse(WAGP %in% 30000:55000, "Mid-low", ifelse(WAGP %in% 55000:95000, "Midian", ifelse(WAGP %in% 95000:150000, "Mid-high", "High")))))%>%
-  mutate(Gender=ifelse(SEX== 1, "Male", ifelse(SEX== 2, "Female", NA)))%>%
-  mutate(Race=ifelse(RAC1P==1, "White", ifelse(RAC1P==2, "Black", ifelse(RAC1P==3, "American Indian", ifelse(RAC1P==6, "Asian", "Others")))))%>%
-  mutate(MARR=ifelse(MAR==1, "Married", ifelse(MAR==2, "Widowed", ifelse(MAR==3, "Divorced", ifelse(MAR==4, "Separated", "Never Married")))))%>%
-  mutate(Edu=ifelse(SCHL %in% 0:15, "No Highschool", ifelse(SCHL==16, "High School", ifelse(SCHL==17, "GED", ifelse(SCHL %in% 18:19, "College Credit", ifelse(SCHL==21, "Bachelor's", ifelse(SCHL==22, "Master's", ifelse(SCHL==24, "PhD", "Other"))))))))%>%
-  ungroup()
+<!--```{r, include = F}-->
+<!--#regrouping-->
+<!--pusa1 <--->
+<!--  pusa %>% -->
+<!--  mutate(age = ifelse(AGEP %in% 0:18, "Under 18", ifelse(AGEP %in% 18:29, "20s", ifelse(AGEP %in% 30:39, "30s", ifelse(AGEP %in% 40:49, "40s", ifelse(AGEP %in% 50:59, "50s", ifelse(AGEP %in% 60:69, "60s", "Above 70"))))))) %>%-->
+<!--  mutate(income = ifelse(WAGP %in% 0:30000, "Low", ifelse(WAGP %in% 30000:55000, "Mid-low", ifelse(WAGP %in% 55000:95000, "Midian", ifelse(WAGP %in% 95000:150000, "Mid-high", "High")))))%>%-->
+<!--  mutate(Gender=ifelse(SEX== 1, "Male", ifelse(SEX== 2, "Female", NA)))%>%-->
+<!--  mutate(Race=ifelse(RAC1P==1, "White", ifelse(RAC1P==2, "Black", ifelse(RAC1P==3, "American Indian", ifelse(RAC1P==6, "Asian", "Others")))))%>%-->
+<!--  mutate(MARR=ifelse(MAR==1, "Married", ifelse(MAR==2, "Widowed", ifelse(MAR==3, "Divorced", ifelse(MAR==4, "Separated", "Never Married")))))%>%-->
+<!--  mutate(Edu=ifelse(SCHL %in% 0:15, "No Highschool", ifelse(SCHL==16, "High School", ifelse(SCHL==17, "GED", ifelse(SCHL %in% 18:19, "College Credit", ifelse(SCHL==21, "Bachelor's", ifelse(SCHL==22, "Master's", ifelse(SCHL==24, "PhD", "Other"))))))))%>%-->
+<!--  ungroup()-->
 
-#rearrange the factors
-pusa1$Gender<-factor(pusa1$Gender, levels=c("Male","Female"))
-pusa1$income<-factor(pusa1$income, levels=c("Low", "Mid-low", "Midian", "Mid-high", "High"))
-pusa1$age<-factor(pusa1$age, levels=c("Under 18", "20s", "30s", "40s", "50s", "60s", "Above 70"))
-pusa1$Edu<-factor(pusa1$Edu, levels=c("No Highschool", "High School", "GED", "College Credit", "Bachelor's", "Master's", "PhD", "Other"))
-pusa1$Race<-factor(pusa1$Race, levels=c("White", "Black", "American Indian", "Asian", "Others"))
-```
+<!--#rearrange the factors-->
+<!--pusa1$Gender<-factor(pusa1$Gender, levels=c("Male","Female"))-->
+<!--pusa1$income<-factor(pusa1$income, levels=c("Low", "Mid-low", "Midian", "Mid-high", "High"))-->
+<!--pusa1$age<-factor(pusa1$age, levels=c("Under 18", "20s", "30s", "40s", "50s", "60s", "Above 70"))-->
+<!--pusa1$Edu<-factor(pusa1$Edu, levels=c("No Highschool", "High School", "GED", "College Credit", "Bachelor's", "Master's", "PhD", "Other"))-->
+<!--pusa1$Race<-factor(pusa1$Race, levels=c("White", "Black", "American Indian", "Asian", "Others"))-->
+<!--```-->
 
 
 
@@ -137,6 +137,9 @@ mar13 <-
   summarise(percent=round(sum(HICOV==1)/length(HICOV),2))
 ```
 
+![Age & Gender 2013](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Age%26Gender%202013.jpeg)
+![Race & Marital Status 2013](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Marital%26Race%202013.jpeg)
+
 * From a few selected demographics, it appears that females are only slightly more likely to have health insurance compared to males (86% vs. 89%). 
 
 * When it comes to age, the older you are, the more likely you are to be insured (with the exception of minors younger than 18 years). In fact, over 99% of those 70 or older had some form of health insurance (predictably Medicare).
@@ -145,8 +148,7 @@ mar13 <-
 
 * Lastly, those who are married or widowed were more likely to be insured, as those who were divorced or separated were less likely.
 
-![Age & Gender 2013](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Age%26Gender%202013.jpeg)
-![Race & Marital Status 2013](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Marital%26Race%202013.jpeg)
+
 
 ```{r, include=FALSE}
     #Age factor
@@ -225,6 +227,10 @@ plot_grid(p4,p3,ncol=2,rel_heights=c(1,1))
 ### > Location   (State map goes here!!!!!)
 
 We label the states as blue(Democratic) and red(Republican) according to 2012 Presidential Election result. We wish to investigate whether the political views affect the health insurance adoption.
+
+
+
+
 
 ```{r, include = F}
 
@@ -341,50 +347,52 @@ plot_grid(pm1,pm2,ncol=2,rel_heights=c(1,1))
 
 ### > Income & Education Level
 
-```{r, eval=TRUE, echo=FALSE}
-    #Income factor
-income13 <- 
-  pusa1 %>% filter(year=="2013") %>%
-  group_by(year, income) %>% 
-  summarise(percent=round(sum(HICOV==1)/length(HICOV),3))
-    #Education factor
-Edu13 <- 
-  pusa1 %>% filter(year=="2013") %>%
-  group_by(year, Edu) %>% 
-  summarise(percent=round(sum(HICOV==1)/length(HICOV),3))
+![Income & Education Level 2013](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Income%26Edu%202013.jpeg)
 
-  #Graphs
-    #Income factor
-p5 <- ggplot(income13,aes(x=income,y=percent,fill=percent))+
-  scale_fill_gradient("Count", low = "pink", high = "purple")+
-  geom_bar(stat="identity")+ggtitle("Health Coverage by Income Level in 2013") +
-  #theme(legend.position = "none") +
-  scale_y_continuous(labels=percent)+
-  ylab("Health Insurance Coverage Rate")+
-  geom_hline(yintercept = 0.8725,colour="red",lty=2) +
-  geom_text(aes(label=percent),colour="black",size=3,vjust=4)+xlab("Income Level") +
-  theme(plot.title = element_text(size = rel(0.7)))+
-  theme(axis.text.x = element_text(size=8,face="bold",angle = 30, hjust=1))+
-  theme(axis.title.x=element_text(size=10,face="bold"))+
-  theme(axis.text.y = element_text(size=8,face="bold"))+
-  theme(axis.title.y=element_text(size=10, face="bold"))
-    #Education factor
-p6 <- ggplot(Edu13,aes(x=Edu,y=percent,fill=percent))+
-  scale_fill_gradient("Count", low = "light green", high = "dark green")+
-  geom_bar(stat="identity")+ggtitle("Health Coverage by Education Level") +
-  #theme(legend.position = "none") +
-  scale_y_continuous(labels=percent)+
-  ylab("Health Insurance Coverage Rate")+
-  geom_hline(yintercept = 0.8725,colour="red",lty=2) +
-  geom_text(aes(label=percent),colour="black",size=3,vjust=4)+xlab("Education Level") +
-  theme(plot.title = element_text(size = rel(0.7)))+
-  theme(axis.text.x = element_text(size=8,face="bold",angle = 30, hjust=1))+
-  theme(axis.title.x=element_text(size=10,face="bold"))+
-  theme(axis.text.y = element_text(size=8,face="bold"))+
-  theme(axis.title.y=element_text(size=10, face="bold"))
-     #Combine
-plot_grid(p5,p6,ncol=2,rel_heights=c(1,1))
-```
+<!--```{r, eval=TRUE, echo=FALSE}-->
+<!--    #Income factor-->
+<!--income13 <- -->
+<!--  pusa1 %>% filter(year=="2013") %>%-->
+<!--  group_by(year, income) %>% -->
+<!--  summarise(percent=round(sum(HICOV==1)/length(HICOV),3))-->
+<!--    #Education factor-->
+<!--Edu13 <- -->
+<!--  pusa1 %>% filter(year=="2013") %>%-->
+<!--  group_by(year, Edu) %>% -->
+<!--  summarise(percent=round(sum(HICOV==1)/length(HICOV),3))-->
+
+<!--  #Graphs-->
+<!--    #Income factor-->
+<!--p5 <- ggplot(income13,aes(x=income,y=percent,fill=percent))+-->
+<!--  scale_fill_gradient("Count", low = "pink", high = "purple")+-->
+<!--  geom_bar(stat="identity")+ggtitle("Health Coverage by Income Level in 2013") +-->
+<!--  #theme(legend.position = "none") +-->
+<!--  scale_y_continuous(labels=percent)+-->
+<!--  ylab("Health Insurance Coverage Rate")+-->
+<!--  geom_hline(yintercept = 0.8725,colour="red",lty=2) +-->
+<!--  geom_text(aes(label=percent),colour="black",size=3,vjust=4)+xlab("Income Level") +-->
+<!--  theme(plot.title = element_text(size = rel(0.7)))+-->
+<!--  theme(axis.text.x = element_text(size=8,face="bold",angle = 30, hjust=1))+-->
+<!--  theme(axis.title.x=element_text(size=10,face="bold"))+-->
+<!--  theme(axis.text.y = element_text(size=8,face="bold"))+-->
+<!--  theme(axis.title.y=element_text(size=10, face="bold"))-->
+<!--    #Education factor-->
+<!--p6 <- ggplot(Edu13,aes(x=Edu,y=percent,fill=percent))+-->
+<!--  scale_fill_gradient("Count", low = "light green", high = "dark green")+-->
+<!--  geom_bar(stat="identity")+ggtitle("Health Coverage by Education Level") +-->
+<!--  #theme(legend.position = "none") +-->
+<!--  scale_y_continuous(labels=percent)+-->
+<!--  ylab("Health Insurance Coverage Rate")+-->
+<!--  geom_hline(yintercept = 0.8725,colour="red",lty=2) +-->
+<!--  geom_text(aes(label=percent),colour="black",size=3,vjust=4)+xlab("Education Level") +-->
+<!--  theme(plot.title = element_text(size = rel(0.7)))+-->
+<!--  theme(axis.text.x = element_text(size=8,face="bold",angle = 30, hjust=1))+-->
+<!--  theme(axis.title.x=element_text(size=10,face="bold"))+-->
+<!--  theme(axis.text.y = element_text(size=8,face="bold"))+-->
+<!--  theme(axis.title.y=element_text(size=10, face="bold"))-->
+<!--     #Combine-->
+<!--plot_grid(p5,p6,ncol=2,rel_heights=c(1,1))-->
+<!--```-->
 
 * As expected, people with lower income are less likely to have health insurance. (On the graph, it   showed that the high class has a lower health insurance coverage rate, but it's due to the small    population being sensitive to a small change)
 
@@ -400,96 +408,99 @@ So as the Affordable Care Act continues to ramp up, how has this changed the lik
 
 ### > Demographics
 
-```{r, include=FALSE}
-    #Age factor
-age_gp <-
-  pusa1 %>% 
-  group_by(year, HICOV, age) %>%
-  summarise(n()) %>%
-  spread('year', 'n()') %>%
-  mutate(delta = round((`2014` - `2013`)/`2013`,3))
-    #Gender factor
-sex_gp <-
-  pusa1 %>% group_by(year, HICOV, Gender) %>%
-  summarise(n()) %>%
-  spread('year', 'n()') %>%
-  mutate(delta = round((`2014` - `2013`)/`2013`,3))
-    #Race factor
-race_gp <-
-  pusa1 %>% group_by(year, HICOV, Race) %>%
-  summarise(n()) %>%
-  spread('year', 'n()') %>%
-  mutate(delta = round((`2014` - `2013`)/`2013`,3))
-    #Marital Status factor
-marital_gp <- 
-  pusa1 %>% 
-  group_by(year, HICOV, MARR) %>%
-  summarise(n()) %>%
-  spread('year', 'n()') %>%
-  mutate(delta = round((`2014` - `2013`)/`2013`,3))
+![Age & Gender Increase](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Age%26Gender_increase.jpeg)
+![Marital & Race Increase](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Marital%26Race_increase.jpeg)
 
-  #Graphs
-    #Age factor
-p21 <- ggplot(age_gp[age_gp$HICOV==1,],aes(x=age,y=delta, fill=delta))+
-  scale_fill_gradient("Count", low = "light green", high = "dark green")+
-  geom_bar(stat="identity")+ggtitle("Increase in Health Coverage by Age") +
-  #theme(legend.position = "none") + 
-  geom_hline(yintercept = 0.0286,colour="red",lty=2) +
-  scale_y_continuous(labels=percent)+
-  geom_text(aes(label=delta),colour="black",size=3,vjust=1.4)+xlab("Age Group") +
-  ylab("Health Coverage Increase Rate")+
-  theme(plot.title = element_text(size = rel(0.7)))+
-  theme(axis.text.x = element_text(size=8,face="bold",angle = 30, hjust=1))+
-  theme(axis.title.x=element_text(size=10,face="bold"))+
-  theme(axis.text.y = element_text(size=8,face="bold"))+
-  theme(axis.title.y=element_text(size=10, face="bold"))
-    #Gender factor
-p22 <- ggplot(sex_gp[sex_gp$HICOV==1,],aes(x=Gender,y=delta,fill=delta))+
-  scale_fill_gradient("Count", low = "thistle2", high = "red")+
-  geom_bar(stat="identity")+ggtitle("Increase in Health Coverage by Gender") +
-  ylab("Health Coverage Increase Rate")+
-  #theme(legend.position = "none") + 
-  geom_hline(yintercept = 0.0286,colour="red",lty=2) +
-  scale_y_continuous(labels=percent)+
-  geom_text(aes(label=delta),colour="black",size=3,vjust=2) +
-  theme(plot.title = element_text(size = rel(0.7)))+
-  theme(axis.text.x = element_text(size=8,face="bold",angle = 30, hjust=1))+
-  theme(axis.title.x=element_text(size=10,face="bold"))+
-  theme(axis.text.y = element_text(size=8,face="bold"))+
-  theme(axis.title.y=element_text(size=10, face="bold"))
-    #Race factor
-p23 <- ggplot(race_gp[race_gp$HICOV==1,],aes(x=Race,y=delta,fill=delta))+
-  scale_fill_gradient("Count", low = "yellow", high = "orange")+
-  geom_bar(stat="identity")+ggtitle("Increase in Health Coverage by Race") +
-  ylab("Health Coverage Increase Rate")+
-  #theme(legend.position = "none") +
-  scale_y_continuous(labels=percent)+
-  geom_hline(yintercept = 0.0286,colour="red",lty=2) +
-  geom_text(aes(label=delta),colour="black",size=3,vjust=2)+xlab("Race Group") +
-  theme(plot.title = element_text(size = rel(0.7)))+
-  theme(axis.text.x = element_text(size=8,face="bold",angle = 30, hjust=1))+
-  theme(axis.title.x=element_text(size=10,face="bold"))+
-  theme(axis.text.y = element_text(size=8,face="bold"))+
-  theme(axis.title.y=element_text(size=10, face="bold"))
-    #Marital Status factor
-p24 <- ggplot(marital_gp[marital_gp$HICOV==1,],aes(x=MARR,y=delta,fill=delta))+
-  scale_fill_gradient("Count", low = "pink", high = "purple")+
-  geom_bar(stat="identity")+ggtitle("Increase in Health Coverage by Marital Status") +
-  ylab("Health Coverage Increase Rate")+
-  #theme(legend.position = "none") +
-  scale_y_continuous(labels=percent)+
-  geom_hline(yintercept = 0.0286,colour="red",lty=2) +
-  geom_text(aes(label=delta),colour="black",size=3,vjust=1.37)+xlab("Marital Status")+
-  theme(plot.title = element_text(size = rel(0.7)))+
-  theme(axis.text.x = element_text(size=8,face="bold",angle = 30, hjust=1))+
-  theme(axis.title.x=element_text(size=10,face="bold"))+
-  theme(axis.text.y = element_text(size=8,face="bold"))+
-  theme(axis.title.y=element_text(size=10, face="bold"))
-```
-```{r, eval=TRUE, echo=FALSE}
-plot_grid(p21,p22,ncol=2,rel_heights=c(1,1))
-plot_grid(p24,p23,ncol=2,rel_heights=c(1,1))
-```
+<!--```{r, include=FALSE}-->
+<!--    #Age factor-->
+<!--age_gp <--->
+<!--  pusa1 %>% -->
+<!--  group_by(year, HICOV, age) %>%-->
+<!--  summarise(n()) %>%-->
+<!--  spread('year', 'n()') %>%-->
+<!--  mutate(delta = round((`2014` - `2013`)/`2013`,3))-->
+<!--    #Gender factor-->
+<!--sex_gp <--->
+<!--  pusa1 %>% group_by(year, HICOV, Gender) %>%-->
+<!--  summarise(n()) %>%-->
+<!--  spread('year', 'n()') %>%-->
+<!--  mutate(delta = round((`2014` - `2013`)/`2013`,3))-->
+<!--    #Race factor-->
+<!--race_gp <--->
+<!--  pusa1 %>% group_by(year, HICOV, Race) %>%-->
+<!--  summarise(n()) %>%-->
+<!--  spread('year', 'n()') %>%-->
+<!--  mutate(delta = round((`2014` - `2013`)/`2013`,3))-->
+<!--    #Marital Status factor-->
+<!--marital_gp <- -->
+<!--  pusa1 %>% -->
+<!--  group_by(year, HICOV, MARR) %>%-->
+<!--  summarise(n()) %>%-->
+<!--  spread('year', 'n()') %>%-->
+<!--  mutate(delta = round((`2014` - `2013`)/`2013`,3))-->
+
+<!--  #Graphs-->
+<!--    #Age factor-->
+<!--p21 <- ggplot(age_gp[age_gp$HICOV==1,],aes(x=age,y=delta, fill=delta))+-->
+<!--  scale_fill_gradient("Count", low = "light green", high = "dark green")+-->
+<!--  geom_bar(stat="identity")+ggtitle("Increase in Health Coverage by Age") +-->
+<!--  #theme(legend.position = "none") + -->
+<!--  geom_hline(yintercept = 0.0286,colour="red",lty=2) +-->
+<!--  scale_y_continuous(labels=percent)+-->
+<!--  geom_text(aes(label=delta),colour="black",size=3,vjust=1.4)+xlab("Age Group") +-->
+<!--  ylab("Health Coverage Increase Rate")+-->
+<!--  theme(plot.title = element_text(size = rel(0.7)))+-->
+<!--  theme(axis.text.x = element_text(size=8,face="bold",angle = 30, hjust=1))+-->
+<!--  theme(axis.title.x=element_text(size=10,face="bold"))+-->
+<!--  theme(axis.text.y = element_text(size=8,face="bold"))+-->
+<!--  theme(axis.title.y=element_text(size=10, face="bold"))-->
+<!--    #Gender factor-->
+<!--p22 <- ggplot(sex_gp[sex_gp$HICOV==1,],aes(x=Gender,y=delta,fill=delta))+-->
+<!--  scale_fill_gradient("Count", low = "thistle2", high = "red")+-->
+<!--  geom_bar(stat="identity")+ggtitle("Increase in Health Coverage by Gender") +-->
+<!--  ylab("Health Coverage Increase Rate")+-->
+<!--  #theme(legend.position = "none") + -->
+<!--  geom_hline(yintercept = 0.0286,colour="red",lty=2) +-->
+<!--  scale_y_continuous(labels=percent)+-->
+<!--  geom_text(aes(label=delta),colour="black",size=3,vjust=2) +-->
+<!--  theme(plot.title = element_text(size = rel(0.7)))+-->
+<!--  theme(axis.text.x = element_text(size=8,face="bold",angle = 30, hjust=1))+-->
+<!--  theme(axis.title.x=element_text(size=10,face="bold"))+-->
+<!--  theme(axis.text.y = element_text(size=8,face="bold"))+-->
+<!--  theme(axis.title.y=element_text(size=10, face="bold"))-->
+<!--    #Race factor-->
+<!--p23 <- ggplot(race_gp[race_gp$HICOV==1,],aes(x=Race,y=delta,fill=delta))+-->
+<!--  scale_fill_gradient("Count", low = "yellow", high = "orange")+-->
+<!--  geom_bar(stat="identity")+ggtitle("Increase in Health Coverage by Race") +-->
+<!--  ylab("Health Coverage Increase Rate")+-->
+<!--  #theme(legend.position = "none") +-->
+<!--  scale_y_continuous(labels=percent)+-->
+<!--  geom_hline(yintercept = 0.0286,colour="red",lty=2) +-->
+<!--  geom_text(aes(label=delta),colour="black",size=3,vjust=2)+xlab("Race Group") +-->
+<!--  theme(plot.title = element_text(size = rel(0.7)))+-->
+<!--  theme(axis.text.x = element_text(size=8,face="bold",angle = 30, hjust=1))+-->
+<!--  theme(axis.title.x=element_text(size=10,face="bold"))+-->
+<!--  theme(axis.text.y = element_text(size=8,face="bold"))+-->
+<!--  theme(axis.title.y=element_text(size=10, face="bold"))-->
+<!--    #Marital Status factor-->
+<!--p24 <- ggplot(marital_gp[marital_gp$HICOV==1,],aes(x=MARR,y=delta,fill=delta))+-->
+<!--  scale_fill_gradient("Count", low = "pink", high = "purple")+-->
+<!--  geom_bar(stat="identity")+ggtitle("Increase in Health Coverage by Marital Status") +-->
+<!--  ylab("Health Coverage Increase Rate")+-->
+<!--  #theme(legend.position = "none") +-->
+<!--  scale_y_continuous(labels=percent)+-->
+<!--  geom_hline(yintercept = 0.0286,colour="red",lty=2) +-->
+<!--  geom_text(aes(label=delta),colour="black",size=3,vjust=1.37)+xlab("Marital Status")+-->
+<!--  theme(plot.title = element_text(size = rel(0.7)))+-->
+<!--  theme(axis.text.x = element_text(size=8,face="bold",angle = 30, hjust=1))+-->
+<!--  theme(axis.title.x=element_text(size=10,face="bold"))+-->
+<!--  theme(axis.text.y = element_text(size=8,face="bold"))+-->
+<!--  theme(axis.title.y=element_text(size=10, face="bold"))-->
+<!--```-->
+<!--```{r, eval=TRUE, echo=FALSE}-->
+<!--plot_grid(p21,p22,ncol=2,rel_heights=c(1,1))-->
+<!--plot_grid(p24,p23,ncol=2,rel_heights=c(1,1))-->
+<!--```-->
 
 * There was no difference between genders. They are equally likely to purchase health insurance.
 
@@ -503,25 +514,25 @@ plot_grid(p24,p23,ncol=2,rel_heights=c(1,1))
 ### > Location  (State goes here!!!!)
 
 
+![Income & Education Increase](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Income%26Edu_increase.jpeg)
+![Income & Education Increase 2](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Income%26Edu_value_Inc.jpeg)
 
-
-
-```{r}
-state_gp <-
-  pusa1 %>% group_by(year, HICOV, state) %>%
-  summarise(n()) %>%
-  spread('year', 'n()') %>%
-  mutate(delta = (`2014` - `2013`)/`2013`)
-statep_gp <- ggplot() +
-  geom_map(data=us, map=us,aes(x=long, y=lat, map_id=region),
-           fill="#ffffff", color="#ffffff", size=0.15) + 
-  geom_map(data=state_gp[state_gp$HICOV==1,], map=us,aes(fill=delta, map_id=state),
-           color="#ffffff", size=0.15) + 
-  scale_fill_continuous(low='yellow', high='darkorange', 
-                    guide='colorbar')+ggtitle("The Percentage increase in Health Insurance Coverage by State")+        
-  theme(axis.text=element_blank(),axis.ticks=element_blank(),
-        axis.title=element_blank())
-```
+<!--```{r}-->
+<!--state_gp <--->
+<!--  pusa1 %>% group_by(year, HICOV, state) %>%-->
+<!--  summarise(n()) %>%-->
+<!--  spread('year', 'n()') %>%-->
+<!--  mutate(delta = (`2014` - `2013`)/`2013`)-->
+<!--statep_gp <- ggplot() +-->
+<!--  geom_map(data=us, map=us,aes(x=long, y=lat, map_id=region),-->
+<!--           fill="#ffffff", color="#ffffff", size=0.15) + -->
+<!--  geom_map(data=state_gp[state_gp$HICOV==1,], map=us,aes(fill=delta, map_id=state),-->
+<!--           color="#ffffff", size=0.15) + -->
+<!--  scale_fill_continuous(low='yellow', high='darkorange', -->
+<!--                    guide='colorbar')+ggtitle("The Percentage increase in Health Insurance Coverage by State")+        -->
+<!--  theme(axis.text=element_blank(),axis.ticks=element_blank(),-->
+<!--        axis.title=element_blank())-->
+<!--```-->
 
 
 
