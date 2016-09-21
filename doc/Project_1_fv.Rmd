@@ -1,9 +1,3 @@
-<!-- - Final reports with plots in similar format. -->
-<!-- - Weights and Allocation Flags -->
-<!-- - Sig Differences -->
-<!-- - Github -->
-<!-- - Logistic Regression -->
-
 
 ---
 title: "Health Insurance Coverage Analysis""
@@ -143,6 +137,9 @@ mar13 <-
   summarise(percent=round(sum(HICOV==1)/length(HICOV),2))
 ```
 
+![Age & Gender 2013]()
+
+
 ```{r, include=FALSE}
     #Age factor
 p1 <- ggplot(age13,aes(x=age,y=percent,fill=percent))+
@@ -177,6 +174,8 @@ p2 <- ggplot(sex13,aes(x=Gender,y=percent,fill=percent))+
   theme(axis.title.y=element_text(size=10, face="bold"))
 ```
 
+![Race & Marital Status 2013]()
+
 ```{r, include=FALSE}
 #Race factor
 p3 <- ggplot(race13,aes(x=Race, y=percent,fill=percent))+
@@ -206,7 +205,6 @@ p4 <- ggplot(mar13,aes(x=MARR,y=percent,fill=percent))+
   theme(axis.title.x=element_text(size=10,face="bold"))+
   theme(axis.text.y = element_text(size=8,face="bold"))+
   theme(axis.title.y=element_text(size=10, face="bold"))
-    #Combine Graphs
 ```
 ```{r, eval=TRUE, echo=FALSE}
 plot_grid(p1,p2,ncol=2,rel_heights=c(1,1))
@@ -283,6 +281,7 @@ state_pub14 <- heal_ins14 %>%
   summarise(count = n(),perc_hc_weighted = weighted.mean(PUBCOV, w = PWGTP, na.rm = T))#State population with PUBLIC insurance in 2014
 
 ################# Maps #####################
+
 us <- map_data("state")
  #2013  private insurance coverage percent map
 statep_priv13 <- ggplot() +
@@ -631,4 +630,4 @@ plot_grid(p10,p11,ncol=2,rel_heights=c(2,1))
 
 ## 3. Conclusion
 
-In 2014, more Americans became insured, with the Affordable Care Act most likely to being the main catalyst. Certain individuals were likely to not have insurance, and these individuals were most likely to have insurance. As ObamaCare was meant to be for those who need financial assistance to get insurance, it is reasonalbe that those who meet the criteria such as low income class have a larger increase in health insurance enrollments. It could have been more accurate if we had data that specifies a source of insurance, indicating whether or not a person was a beneficiary of ObamaCare. Although insurance information we used include both private and public insurance, we identified a significant growth in health insurance enrollment especially for targeted groups. 
+In 2014, more Americans became insured, with the Affordable Care Act most likely to being the main catalyst. As ObamaCare was meant to be for those who need financial assistance to get insurance, it is reasonalbe that those who meet the criteria such as low income class have a larger increase in health insurance enrollments. It could have been more accurate if we had data that specifies a source of insurance, indicating whether or not a person was a beneficiary of ObamaCare. Although insurance information we used include both private and public insurance, we identified a significant growth in health insurance enrollment especially for targeted groups. 
