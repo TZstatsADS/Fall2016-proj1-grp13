@@ -517,7 +517,7 @@ So as the Affordable Care Act continues to ramp up, how has this changed the lik
 
 ![Map 1](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Rplot20.png)
 
-
+Most of the states with highest increasing rate are from the west coast.
 
 <!--```{r}-->
 <!--state_gp <--->
