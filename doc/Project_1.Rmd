@@ -1,0 +1,283 @@
+<!-- - Final reports with plots in similar format. -->
+<!-- - Weights and Allocation Flags -->
+<!-- - Sig Differences -->
+<!-- - Github -->
+<!-- - Logistic Regression -->
+
+
+---
+title: "Health Coverage"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include = F}
+library(dplyr)
+library(readr)
+library(DT)
+library(data.table)
+library(tidyr)
+library(ggplot2)
+library(scales)
+
+setwd('C:\\Users\\LENOVO\\Desktop\\Academic\\ADS\\project_1')
+
+pusa <- tbl_df(fread('./data/pus_sampled.csv'))
+
+pusa <-
+  pusa %>% 
+  group_by(year) %>%
+  mutate(poverty = ifelse(POVPIP < 1, 1, 2)) %>%
+  mutate(age = ifelse(AGEP < 18, '<18', ifelse(
+    AGEP >= 18 & AGEP < 30, '18-29', ifelse(
+      AGEP >= 30 & AGEP < 40, '30s', ifelse(
+        AGEP >= 40 & AGEP < 50, '40s', ifelse(
+          AGEP >= 50 & AGEP < 60, '50s', ifelse(
+            AGEP >= 60 & AGEP < 70, '60s', ifelse(
+              AGEP >= 70, '70+', 'NA')
+            )
+          )
+        )
+      )
+    )
+  )) %>%
+  mutate(income = ntile(WAGP, 4)) %>%
+  ungroup()
+
+pusa_13 <-
+  pusa %>% 
+  filter(year == '2013')
+```
+
+## Objective
+
+From 2013 to 2014, there was a 3% increase, as the percentage of Americans who had health insurance coverage went from 87.1% to 90.0%, a marked increase year-over-year.  During this time, the Affordable Care Act (aka Obamacare) started to enroll more people, and also penalize those without health insurance coverage.
+
+```{r, include = F}
+HC <- 
+  pusa %>%
+  group_by(year, HICOV) %>%
+  summarise(n()) %>%
+  spread('year', 'n()') %>%
+  mutate(perc_13 = `2013`/sum(`2013`)) %>%
+  mutate(perc_14 = `2014`/sum(`2014`))
+HC
+```
+
+This brief exploratory analysis looks to achieve two things:
+
+* Understand some basic differences between the types of individuals who had health insurance vs. those who did not, by comparing this rate to that of the national average (87.1%).
+
+* Identify the likely characteristics of indivuals who were more likely to enroll from the 2013 to 2014 period - which seems plausible to attribute to the Affordable Care Act.
+
+## Demographics
+
+From a few selected demographics, it appears that females are only slightly more likely to have health insurance compared to males (85.7% vs. 88.6%). 
+
+When it comes to age, the older you are, the more likely you are to be insured (with the exception of minors younger than 18 years). In fact, over 99% of those 70 or older had some form of health insurance (predictably Medicare).
+
+Minorities also seemed to be less likely to be insured, especially American Indians and Alaskan Natives.
+
+Lastly, those who are married or widowed were more likely to be insured, as those who were divorced or separated were less likely.
+
+```{r, include = F}
+#Sex
+pusa_13 %>%
+  group_by(SEX, HICOV) %>%
+  summarise(n = n()) %>%
+  mutate(col_perc = n / sum(n)) %>%
+  filter(HICOV == 1)
+
+#Age
+pusa_13 %>%
+  group_by(age, HICOV) %>%
+  summarise(n = n()) %>%
+  mutate(col_perc = n / sum(n)) %>%
+  filter(HICOV == 1)
+
+#Race / Ethnicity
+pusa_13 %>%
+  group_by(RAC1P, HICOV) %>%
+  summarise(n = n()) %>%
+  mutate(col_perc = n / sum(n)) %>%
+  filter(HICOV == 1)
+
+#Marital Status
+pusa_13 %>%
+  group_by(MAR, HICOV) %>%
+  summarise(n = n()) %>%
+  mutate(col_perc = n / sum(n)) %>%
+  filter(HICOV == 1)
+
+```
+
+```{r}
+
+
+```
+
+
+## Location
+
+xxxxxx......
+
+```{r, include = F}
+
+
+
+```
+
+
+
+## Employment & Income
+
+Surprisingly, individuals working in the private for-profit sector were 5 to 6 percentage points below the national average, while government employees were the most likely individuals to have insurance.
+
+Education also seemed to play a large role in whether someone had health insurance or not, with individuals with more education being more likely to have health insurance.
+
+Interestingly, the 3rd quartile of wages had the lowest chance of being insured.
+
+Finally, those below the income poverty line have low levels of being insured.
+
+```{r, include = F}
+#Class of Worker (18+)
+pusa_13 %>%
+  filter(AGEP >= 18) %>%
+  group_by(COW, HICOV) %>%
+  summarise(n = n()) %>%
+  mutate(col_perc = n / sum(n)) %>%
+  filter(HICOV == 1)
+
+#Education (18+)
+pusa_13 %>%
+  filter(AGEP >= 18) %>%
+  mutate(education = replace(SCHL, which(SCHL < 15), 15)) %>%
+  group_by(education, HICOV) %>%
+  summarise(n = n()) %>%
+  mutate(col_perc = n / sum(n)) %>%
+  filter(HICOV == 1)
+
+#Income (18+)
+pusa_13 %>%
+  filter(AGEP >= 18) %>%
+  group_by(income, HICOV) %>%
+  summarise(n = n()) %>%
+  mutate(col_perc = n / sum(n)) %>%
+  filter(HICOV == 1)
+
+#Poverty (18+)
+pusa_13 %>%
+  filter(AGEP >= 18) %>%
+  group_by(poverty, HICOV) %>%
+  summarise(n = n()) %>%
+  mutate(col_perc = n / sum(n)) %>%
+  filter(HICOV == 1)
+```
+
+
+# Changes Year-over-Year
+
+So as the Affordable Care Act continues to ramp up, how has this changed the likelihood of certain individuals likely to receive coverage?
+
+#Demographics
+
+Males were slightly more prodded to enroll in health insurance than females.
+
+Younger (18 to 39) and older (60-69) individuals were more likely to become enrolled.
+
+Although some of the results are mixed, minorities seemed more likely to become enrolled year-over-year.
+
+Divorcees were also more likely to enroll.
+
+```{r, include = F}
+
+sex_gp <-
+  pusa %>% group_by(year, HICOV, SEX) %>%
+  summarise(n()) %>%
+  spread('year', 'n()') %>%
+  mutate(delta = (`2014` - `2013`)/`2013`) %>%
+  filter(HICOV == 1)
+sex_gp
+
+age_gp <-
+  pusa %>% 
+  group_by(year, HICOV, age) %>%
+  summarise(n()) %>%
+  spread('year', 'n()') %>%
+  mutate(delta = (`2014` - `2013`)/`2013`) %>%
+  filter(HICOV == 1)
+age_gp
+
+race_gp <-
+  pusa %>% group_by(year, HICOV, RAC1P) %>%
+  summarise(n()) %>%
+  spread('year', 'n()') %>%
+  mutate(delta = (`2014` - `2013`)/`2013`) %>%
+  filter(HICOV == 1)
+race_gp
+
+marital_gp <- 
+  pusa %>% 
+  group_by(year, HICOV, MAR) %>%
+  summarise(n()) %>%
+  spread('year', 'n()') %>%
+  mutate(delta = (`2014` - `2013`)/`2013`) %>%
+  filter(HICOV == 1)
+marital_gp  
+
+```
+
+
+
+## State Changes
+
+
+
+
+
+
+
+
+## Employment / Income
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Conclusion:
+
+In 2014, more Americans became insured, with the Affordable Care Act most likely to being the main catalyst. Certain individuals were likely to not have insurance, and these individuals were most likely to have insurance.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
