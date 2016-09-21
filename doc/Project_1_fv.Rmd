@@ -233,7 +233,6 @@ We label the states as blue(Democratic) and red(Republican) according to 2012 Pr
 
 Most of the states are blue in the right half, which indicates that the states which are more liberal adpot Obamacare better.
 
-![Map #1](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Rplot21.png)
 ![Map #2](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Rplot19.png)
 
 
