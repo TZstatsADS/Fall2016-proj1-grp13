@@ -10,10 +10,7 @@ title: "Health Coverage"
 output: github_document
 ---
 
-```{r}
-plot(c(1,2, 3))
-```
-
+![Test](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Rplot04.png)
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
