@@ -513,13 +513,10 @@ So as the Affordable Care Act continues to ramp up, how has this changed the lik
 * It is very interesting that divorced individuals are more liely to purchase health insurance. The logical   guess could be that they don't receive any family health plan and need to have own health insurance after getting divorced.
   
   
-
-
-
-![Income & Education Increase](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Income%26Edu_increase.jpeg)
-![Income & Education Increase 2](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Income%26Edu_value_Inc.jpeg)
-
 ### > Location
+
+![Map 1](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Rplot20.png)
+
 
 
 <!--```{r}-->
@@ -546,6 +543,11 @@ So as the Affordable Care Act continues to ramp up, how has this changed the lik
 
 
 ### > Income & Education Level
+
+![Income & Education Increase](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Income%26Edu_increase.jpeg)
+![Income & Education Increase 2](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Income%26Edu_value_Inc.jpeg)
+
+
 <!--```{r, eval=TRUE, echo=FALSE}-->
 <!--#Income factor-->
 <!--income_gp <--->
