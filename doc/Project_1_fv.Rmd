@@ -225,12 +225,13 @@ This brief exploratory analysis looks to achieve two things:
 
 
 
-### > Location   (State map goes here!!!!!)
+### > Location  
 
 We label the states as blue(Democratic) and red(Republican) according to 2012 Presidential Election result. We wish to investigate whether the political views affect the health insurance adoption.
 
 
-
+![Map #1](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Rplot21.png)
+![Map #2](https://github.com/TZstatsADS/Fall2016-proj1-grp13/blob/master/figs/Rplot19.png)
 
 
 <!--```{r, include = F}-->
